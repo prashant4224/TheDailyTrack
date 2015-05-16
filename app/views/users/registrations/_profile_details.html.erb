@@ -1,0 +1,11 @@
+<div id="profile-details">
+	<% if !@user.blank? %>
+		<% if !@user.photo.blank? %>
+			<%= link_to image_tag(@user.photo.url, size: "190x190", style: "border-radius: 95px"), "javascript:void(0)" %>
+		<% else %>
+			<%=link_to "<i class='fa fa-pencil fa-fw'></i>".html_safe+image_tag("default-user-image.png", size: "190x190", style: "border-radius: 95px"), edit_user_registration_path, remote: true %>
+
+		<% end %>
+		<b><%= @user.name %></b>
+	<% end %>
+</div>

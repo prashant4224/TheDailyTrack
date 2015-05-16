@@ -1,0 +1,26 @@
+<div class="content-left">
+	ttttt
+</div>
+<div class="content-right">
+	okkkk
+</div>
+<div class="content-center">
+	<div class="content">
+		<%= render :partial => 'posts/form', :locals => {post: @post} %>
+		<% if !@posts.blank? %>
+			<% @posts.each do |post| %>
+				<% next if post.blank? %>
+				<div class="title" id="post_<%=post.id%>"><%= post.title %><br>
+					<% post.comments.each do |comment| %>
+						<%= comment.body %><br>
+					<% end %>
+
+					
+					<%- model_class = Comment -%>
+			      <%= render :partial => 'comments/form', locals: {comment: @comment, parent: post} %>
+		    </div>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,47 @@
+<div id="profile-form" style="display: block;">
+	<h2><%#= resource_name.to_s.humanize %> Update</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <%#= f.fields_for :images do |img| %>
+	<%#= img.label :avatar %>
+    <%#= img.file_field :avatar %>
+	<%#= img.label :title %>
+    <%#= img.text_field :title %>
+    <%#= img.hidden_field :kind, :val => "Profile" %>
+
+  <%# end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :photo %><br />
+    <%= f.file_field :photo %>
+  </div>
+
+  <!-- <div class="field">
+    <%#= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%#= f.password_field :current_password, autocomplete: "off" %>
+  </div> -->
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>
+	
+</div>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @objective.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @objective.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @objective.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @objective.end_date %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @objective.type %>
+</p>
+
+<p>
+  <strong>Phase:</strong>
+  <%= @objective.phase %>
+</p>
+
+<%= link_to 'Edit', edit_objective_path(@objective) %> |
+<%= link_to 'Back', objectives_path %>

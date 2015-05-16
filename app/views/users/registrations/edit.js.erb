@@ -1,0 +1,2 @@
+$(".profile-left").find("#profile-form").html('<%= escape_javascript(render(:partial =>"devise/registrations/profile_form", :locals =>{resource_name: resource_name})) %>')
+$(".profile-left").find("#profile-details").hide();

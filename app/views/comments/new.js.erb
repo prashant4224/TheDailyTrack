@@ -1,0 +1,1 @@
+$("#add-comment").replaceWith("<%= escape_javascript(render 'form', locals: {team: @team, plan: @plan, phase: @phase, objective: @objective, post: @post, comment: @comment})%>");

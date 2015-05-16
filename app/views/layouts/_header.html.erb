@@ -1,0 +1,54 @@
+<header id="header">	
+	<nav class="top">
+		<strong class="slogan">
+            <%= yield :head %>
+            <% flash.each do |name, msg| %>
+                <% if msg.is_a?(String) %>
+                    <%= content_tag :div, msg, :class => "flash_#{name}" %>
+                <% end %>
+            <% end %>
+        </strong>
+        <ul class="right">
+          <li class="login">
+    				<% if user_signed_in? %>
+    					<%= current_user.email %> <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+    				<% else %>
+          		Are you a member? <%= link_to "Register", new_user_registration_path, id: "sign-up" %> / <%= link_to "Login", new_user_session_path, id: "sign-in", remote: true %>
+          		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => "popup", :"data-width" => 600, :"data-height" => 400 %>
+          	<% end %>
+          </li>
+        </ul>
+	</nav>
+	<nav class="main">
+        <div class="logo">
+            <strong><a href="http://www.awwwards.com/" title="Awwwards : Best websites around the World">Awwwards</a></strong>
+        </div>
+        <ul class="menu right">
+            <li><a href="http://www.awwwards.com/">Home</a></li>
+            <li>
+                <%= link_to "Teams", teams_path, class: "teams-list" %>
+                <ul>
+                    <% if !@teams.blank? %>
+                        <% @teams.each do |team| %>
+                            <li><%= link_to team.name, team %></li>
+                        <% end %>
+                    <% end %>
+                </ul
+            </li>
+            <li><a href="http://www.awwwards.com/nominees/">Nominees</a></li>
+            <li><a href="http://www.awwwards.com/directory/">Directory</a></li>
+            <li><a href="http://www.awwwards.com/shop/">Shop</a></li>
+            <li><a href="http://www.awwwards.com/jobs/">Jobs</a></li>
+            <li><a href="http://www.awwwards.com/blog/">Blog</a></li>
+            <li><a href="http://www.awwwards.com/about-us/">About us</a></li>
+        </ul>
+    </nav>
+    <div class="box-overlay"></div>
+ </header>
+
+<!--<script type="javascript">
+//   if(window.opener) {
+//     window.opener.location.reload(true);
+//     window.close()
+//   }
+// </script>-->
