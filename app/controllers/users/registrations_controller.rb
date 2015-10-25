@@ -4,25 +4,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :html, :js, :json
 
   # GET /resource/sign_up
-  def new
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
-  def create
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
-  def edit
-    super
-  end
+  # def edit
+  #   super
+  # end
 
   # PUT /resource
-  def update
-    #@user.images.create image_params
-    super
-  end
+  # def update
+  #   #@user.images.create image_params
+  #   super
+  # end
 
   # DELETE /resource
   # def destroy
@@ -46,12 +46,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # You can put the params you want to permit in the empty array.
   def configure_sign_up_params
-    devise_parameter_sanitizer.for(:sign_up).push(:email, :uid, :name, :last_name, :photo, images_attributes: [:title, :holder_type, :holder_id, :avatar, :kind])
+    devise_parameter_sanitizer.for(:sign_up).push(:email, :uid, :name, :last_name, :avatar, photos_attributes: [:title, :photo_holder_type, :photo_holder_id, :avatar, :description])
   end
 
   # You can put the params you want to permit in the empty array.
   def configure_account_update_params
-    devise_parameter_sanitizer.for(:account_update).push(:email, :uid, :name, :last_name, :photo, images_attributes: [:title, :holder_type, :holder_id, :avatar, :kind])
+    devise_parameter_sanitizer.for(:account_update).push(:email, :uid, :name, :last_name, :avatar, photos_attributes: [:title, :photo_holder_type, :photo_holder_id, :avatar, :description])
   end
 
   # The path used after sign up.

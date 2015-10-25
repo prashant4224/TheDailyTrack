@@ -1,6 +1,9 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+require "omniauth-google-oauth2"
 Devise.setup do |config|
+  require "omniauth-google-oauth2"
+  SOCIAL_CONFIG = YAML.load_file("#{::Rails.root}/config/social_keys.yml")[::Rails.env]
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -10,12 +13,12 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'prashant.jeerankalagi@gmail.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
-  # ==> ORM configuration
+  # ==> ORM configurationSOCIAL_CONFIG
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
@@ -140,7 +143,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 4..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -227,14 +230,17 @@ Devise.setup do |config|
     config.navigational_formats = ['*/*', :html, :json, :js]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-    config.omniauth :facebook, "746118032132405", "ce721a2745225d867c950aad97e599c9", :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}, :strategy_class => OmniAuth::Strategies::Facebook
-    config.omniauth :twitter, "jmoRN4Mqlgf2w7RT8rvgrSc32", "cESPPEpcvjSYqBCDGssKz40U2kAnsViLhYkaVQOAx7523gOzoJ", :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}, :strategy_class => OmniAuth::Strategies::Twitter
+  puts SOCIAL_CONFIG["FACEBOOK_KEY"]
+    config.omniauth :facebook, SOCIAL_CONFIG["FACEBOOK_KEY"], SOCIAL_CONFIG["FACEBOOK_SECRET"], scope: 'email,public_profile,user_about_me', info_fields: 'email,name,first_name,last_name,gender,location'
+    # config.omniauth :twitter, "jmoRN4Mqlgf2w7RT8rvgrSc32", "cESPPEpcvjSYqBCDGssKz40U2kAnsViLhYkaVQOAx7523gOzoJ", :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}, :strategy_class => OmniAuth::Strategies::Twitter
+    config.omniauth :google_oauth2, SOCIAL_CONFIG['GOOGLE_KEY'], SOCIAL_CONFIG['GOOGLE_SECRET'], {}
+    config.omniauth :linkedin, SOCIAL_CONFIG['LINKEDIN_KEY'], SOCIAL_CONFIG['LINKEDIN_SECRET'], :scope => 'r_basicprofile r_emailaddress'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

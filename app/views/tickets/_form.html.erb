@@ -1,0 +1,36 @@
+<%= form_for(@ticket) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id if current_user %>
+  <%#= f.hidden_field :objective_id, value: objective.id if objective %>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :team %><br>
+    <%= f.select(:team_id, @teams.collect{|p| [p.name, p.id]}, { :prompt => 'Select Team' }, {:id => "team_select", style: "width: 20%;"})%>
+  </div>
+  <div class="field">
+    <%= f.label :objective %><br>
+    <%#= f.select(:team_id, @teams.collect{|p| [p.name, p.id]}, { :prompt => 'Select objective' }, {:id => "team_select", style: "width: 13%;"} )%>
+    <%= f.select :objective_id, grouped_options_for_select(Phase.for_select), { :prompt => 'Select Objective' }, {:id => "objective_select", style: "width: 20%;"} %>
+  </div>
+  <!--<div class="field">
+    <%#= f.label :user_id %><br>
+    <%#= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%#= f.label :status %><br>
+    <%#= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%#= f.label :objective_id %><br>
+    <%#= f.text_field :objective_id %>
+  </div> -->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

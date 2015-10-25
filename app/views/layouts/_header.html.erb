@@ -1,54 +1,221 @@
-<header id="header">	
-	<nav class="top">
-		<strong class="slogan">
-            <%= yield :head %>
-            <% flash.each do |name, msg| %>
-                <% if msg.is_a?(String) %>
-                    <%= content_tag :div, msg, :class => "flash_#{name}" %>
-                <% end %>
-            <% end %>
-        </strong>
-        <ul class="right">
-          <li class="login">
-    				<% if user_signed_in? %>
-    					<%= current_user.email %> <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-    				<% else %>
-          		Are you a member? <%= link_to "Register", new_user_registration_path, id: "sign-up" %> / <%= link_to "Login", new_user_session_path, id: "sign-in", remote: true %>
-          		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => "popup", :"data-width" => 600, :"data-height" => 400 %>
-          	<% end %>
-          </li>
-        </ul>
-	</nav>
-	<nav class="main">
-        <div class="logo">
-            <strong><a href="http://www.awwwards.com/" title="Awwwards : Best websites around the World">Awwwards</a></strong>
-        </div>
-        <ul class="menu right">
-            <li><a href="http://www.awwwards.com/">Home</a></li>
-            <li>
-                <%= link_to "Teams", teams_path, class: "teams-list" %>
-                <ul>
-                    <% if !@teams.blank? %>
-                        <% @teams.each do |team| %>
-                            <li><%= link_to team.name, team %></li>
-                        <% end %>
-                    <% end %>
-                </ul
-            </li>
-            <li><a href="http://www.awwwards.com/nominees/">Nominees</a></li>
-            <li><a href="http://www.awwwards.com/directory/">Directory</a></li>
-            <li><a href="http://www.awwwards.com/shop/">Shop</a></li>
-            <li><a href="http://www.awwwards.com/jobs/">Jobs</a></li>
-            <li><a href="http://www.awwwards.com/blog/">Blog</a></li>
-            <li><a href="http://www.awwwards.com/about-us/">About us</a></li>
-        </ul>
-    </nav>
-    <div class="box-overlay"></div>
- </header>
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container1">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to "TheDailyTrack", root_path, class: "navbar-brand" %>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <% if user_signed_in? %>
+          <nav class="main-nav">
+            <ul class="nav navbar-nav">      
+            <li style="line-height: 25px;margin-top: 5px;">
+              <%#= form_tag search_path, method: :get do %>
+                <%#= text_field_tag :query, params[:query], autocomplete: :off,autofocus: true, placeholder: 'Search' %>
+                  <%#= submit_tag('Search') %>
+              <%# end %>
+              <%= form_tag search_teams_path, method: :get do %>
+                <%#= f.label "Search for" %>
+                <%= text_field_tag :q, params[:q] %>
+                <%= submit_tag "Go", name: nil %>
+              <% end %>
 
-<!--<script type="javascript">
-//   if(window.opener) {
-//     window.opener.location.reload(true);
-//     window.close()
-//   }
-// </script>-->
+            </li>
+            <li><%= link_to "My Profile", users_profile_path, class: "teams-list" %></li>
+            <li class="dropdown"><%= link_to "Teams", teams_path, class: "teams-list" %>
+              <ul class="sub-menu" style="display: none;">
+                <% unless @teams.blank? %>
+                  <% @teams.each do |team| %>
+                      <li><%= link_to team.name, team %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </li>
+            <!-- <li><%#= link_to "Plans", plans_path %></li>
+            <li><%#= link_to "Phases", phases_path %></li>
+            <li><%#= link_to "Objectives", objectives_path %></li> -->
+            <!-- <li><%#= link_to "Manage Team", objectives_path %></li> -->
+            <li><%= link_to 'Tickets', tickets_path,data: { no_turbolink: true } %></li>
+            <li><a href="http://www.awwwards.com/about-us/">About us</a></li>
+            <li><%= link_to "#{image_tag(@user.avatar.url(:tiny), size: "25x25")+@user.name}".html_safe, root_path, id: "pro-pic" %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+          </ul>
+        </nav>
+          <% else %>
+            <nav class="main-nav1">
+              <ul class="nav navbar-nav">
+                <li><a class="cd-signin" href="javascript:void(0)">Sign in</a></li>
+                <li><a class="cd-signup" href="javascript:void(0)">Sign up</a></li>
+                <!--<li><%#= link_to "Register", new_user_registration_path, id: "sign-up" %></li>
+                <li><%#= link_to "Login", new_user_session_path, id: "sign-in", data: {toggle: "modal", target: "#approvalModal"} %></li>-->
+                <!-- <li><%#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => "popup", data: {width: 600, height: 400} %></li> -->
+              </ul>
+            </nav>
+          <% end %>
+          <!-- </li> -->
+        
+      
+      <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+          <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+            <ul class="cd-switcher">
+              <li><a href="javascript:void(0)">Sign in</a></li>
+              <li><a href="javascript:void(0)">Sign up</a></li>
+            </ul>
+
+            <div id="cd-login"> <!-- log in form -->
+              <!--<form class="cd-form">-->
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "cd-form"}) do |f| %>
+                <p class="fieldset">
+                  <label class="image-replace cd-email" for="signin-email">E-mail</label>
+                  <%#*<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">%>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "full-width has-padding has-border", id: "signin-email",placeholder: "E-mail" %>
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                  <label class="image-replace cd-password" for="signin-password">Password</label>
+                  <%#*<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password">%>
+                  <%= f.password_field :password, autocomplete: "off", class: "full-width has-padding has-border", id: "signin-password", placeholder: "Password" %>
+                  <%#*<a href="#0" class="hide-password">Hide</a>%>
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                  <%#*<input type="checkbox" id="remember-me" checked>%>
+                    <% if devise_mapping.rememberable? -%>
+                      <%= f.check_box :remember_me, id: "remember-me" %>
+                    <% end -%>
+                  <label for="remember-me">Remember me</label>
+                </p>
+
+                <p class="fieldset">
+                  <%#*<input class="full-width" type="submit" value="Login">%>
+                  <%= f.submit "Log in", class: "full-width" %>
+                </p>
+              <%#*</form>%>
+              <% end %>
+
+              <p class="cd-form-bottom-message"><a class="font-14-san" href="javascript:void(0)">Forgot your password?</a></p>
+                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
+            </div> <!-- cd-login -->
+
+            <div id="cd-signup"> <!-- sign up form -->
+              <!-- <form class="cd-form"> -->
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "cd-form"}) do |f| %>
+                <p class="fieldset">
+                  <label class="image-replace cd-username" for="signup-username">First Name</label>
+                  <%= f.text_field :name, autofocus: true, class: "full-width has-padding has-border", id: "signup-username", placeholder: "First Name" %>
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                  <label class="image-replace cd-username" for="signup-username">Last Name</label>
+                  <%= f.text_field :last_name, autofocus: true, class: "full-width has-padding has-border", id: "signup-username", placeholder: "Last Name" %>
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                  <label class="image-replace cd-email" for="signup-email">E-mail</label>
+                  <%= f.email_field :email, autocomplete: "off", class: "full-width has-padding has-border", id: "signup-email", placeholder: "E-mail" %>
+                </p>
+
+                <p class="fieldset">
+                  <label class="image-replace cd-password" for="signup-password">Password</label>
+                  <%= f.password_field :password, autocomplete: "off", class: "full-width has-padding has-border", id: "signup-password", placeholder: "Password" %>
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                  <label class="image-replace cd-password" for="signup-password">Password</label>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: "full-width has-padding has-border", id: "signup-password", placeholder: "Confirmation Password" %>
+                  <!-- <a href="#0" class="hide-password">Hide</a> -->
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <span class="fieldset" style="width: 70%;">
+                  <label class="image-replace cd-username" for="signup-username">Last Name</label>
+                  <%= f.text_field :dob, autofocus: true, class: "full-width has-padding has-border", placeholder: "Date of Birth", style: "width: 70%;" %>
+                  <a href="javascript:void(0)" class="date-picker" id="datepicker"></a>
+                  <span class="cd-error-message">Error message here!</span>
+                </span>
+                <span style="float: right;">
+                  <label style="font-weight: 100;font-size: 16px;color: gainsboro;">Gender</label>                   
+                    <!-- <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username"> -->
+                    <span>
+                      <%= f.radio_button :gender, "F", :checked => (:gender == 'F') %><span>F</span>
+                    </span>
+                    <span>
+                      <%= f.radio_button :gender, "M", :checked => (:gender == 'M') %><span>M</span>
+                    </span>
+                    <span class="cd-error-message">Error message here!</span>
+                  </span>
+
+                
+
+                <p class="fieldset">
+                  <!-- <input type="checkbox" id="accept-terms"> -->
+                  <%= f.check_box :terms_of_service %>
+                  <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+                </p>
+
+                <p class="fieldset">
+                  <!-- <input class="full-width has-padding" type="submit" value="Create account"> -->
+                  <%= f.submit "Sign up", class: "full-width has-padding" %>
+                </p>
+              <!-- </form> -->
+              <% end %>
+
+                    <!-- <a href="#0" class="cd-close-form">Close</a> -->
+            </div> <!-- cd-signup -->
+
+            <ul class="social-links">
+              <li>
+                <%= link_to user_omniauth_authorize_path(:facebook) do%>
+                  <!-- <div class="btn-lg btn-block btn-social btn-facebook">  -->
+                          <i class="fa fa-facebook"></i>
+                  <!-- </div> -->
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to user_omniauth_authorize_path(:google_oauth2) do%>
+                  <!-- <div class="btn-lg btn-block btn-social btn-google">  -->
+                          <i class="fa fa-google"></i>
+                  <!-- </div> -->
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to user_omniauth_authorize_path(:linkedin) do%>
+                  <!-- <div class="btn-lg btn-block btn-social btn-linkedin">  -->
+                          <i class="fa fa-linkedin"></i>
+                  <!-- </div> -->
+                <% end %>
+              </li>
+            </ul>
+
+            <div id="cd-reset-password"> <!-- reset password form -->
+              <p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+              <form class="cd-form">
+                <p class="fieldset">
+                  <label class="image-replace cd-email" for="reset-email">E-mail</label>
+                  <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+                  <span class="cd-error-message">Error message here!</span>
+                </p>
+
+                <p class="fieldset">
+                  <input class="full-width has-padding" type="submit" value="Reset password">
+                </p>
+              </form>
+
+              <p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+            </div> <!-- cd-reset-password -->
+            <a href="#0" class="cd-close-form">Close</a>
+          </div> <!-- cd-user-modal-container -->
+        </div> <!-- cd-user-modal -->
+                                  
+    </div>      
+  </div>
+</div>

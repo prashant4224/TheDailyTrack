@@ -1,0 +1,8 @@
+default:
+  api_login_id: 874NZ7QvPp6Y
+  api_transaction_key: 5JpE698Mdz8Zfp89
+  merchant_hash_value: CloudTrendz
+
+development: 
+test: 
+production: 

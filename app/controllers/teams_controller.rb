@@ -4,13 +4,13 @@ class TeamsController < ApplicationController
   respond_to :html
 
   def index
-    @teams = Team.includes(:plans, plans:[:phases, phases: [:objectives, objectives: [:posts, posts: [:comments]]]])
     @team = Team.new
     @plan = @team.plans.new
     respond_with(@teams)
   end
 
   def show
+    UserMailer.delay.profile_email(current_user)
     respond_with(@team)
   end
 
@@ -25,6 +25,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @team.save
+    UserMailer.profile_email(current_user).deliver
     respond_with(@team)
   end
 
@@ -36,6 +37,15 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_with(@team)
+  end
+
+  def search
+    if params[:q].nil?
+      @teams = []
+    else
+      @q = Team.ransack params[:q]
+      p @team_list = @q.result.includes(:plans)
+    end
   end
 
   private

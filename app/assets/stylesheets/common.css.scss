@@ -24,10 +24,6 @@ a{
 	text-decoration:none;
 	-webkit-transition:color .25s ease-out;transition:color .25s ease-out;
 }
-a:hover{
-	color:#313131;
-	text-decoration:none
-}
 .x-h1{
 	font-size:45px;
 }
@@ -84,6 +80,7 @@ input,textarea,select{
 .clear{
 	clear:both;
 }
+
 
 #header {
 	position:relative;
@@ -217,6 +214,7 @@ input,textarea,select{
 				font-family: cursive;
   			font-size: large;
 			}
+
 			.content {
 				margin:10px;
 
@@ -281,6 +279,11 @@ input,textarea,select{
 		    overflow: hidden;
 		    display: block;
 		}
+		.row{
+			.select2-container {
+				width: 13% !important;
+			}
+		}
 	}
 }
 
@@ -334,4 +337,103 @@ input,textarea,select{
 			color:#555;
 		}
 	}
+}
+#teams .ui-accordion-content {
+    min-height: 200px;
+}
+
+.navbar-collapse {
+	ul {
+    list-style-type:none;
+	}
+	ul li {
+	    display:inline-block;
+	    position:relative;
+	}
+
+	li ul {    
+    background-color: #F0F0F0;
+    position:absolute;
+    left:0;
+    top:40px; /* make this equal to the line-height of the links (specified below) */
+    /*bwidth:150px; */
+	}
+	li li {
+	    position:relative;
+	    margin:0;
+	    display:block;
+	}
+}
+a:hover {
+	color: cornflowerblue ! important;
+	background-color: inherit ! important;
+	text-decoration: none ! important;
+}
+a {
+	color: #666 !important;
+}
+.sub-1 {
+	margin-left: 10px !important;
+}
+.sub-2 {
+	margin-left: 20px !important;
+}
+.sub-3 {
+	margin-left: 30px !important;
+}
+.sub-4 {
+	margin-left: 40px !important;
+}
+
+/* Social button */
+ul.social-links {
+ overflow: auto;
+
+ li {
+	 list-style-type: none;
+	 float: left;
+
+	 a i {
+		 background: #205D7A;
+		 color: #fff;
+		 width: 40px;
+		 height: 40px;
+		 border-radius: 20px;
+		 font-size: 25px;
+		 text-align: center;
+		 margin-right: 10px;
+		 padding-top: 15%;
+		}
+	}
+}
+
+.fa-facebook {
+ background:#3b5998 !important;
+} 
+.fa-linkedin {
+ background:#007bb6 !important;
+}
+.fa-twitter {
+ background:#00aced !important;
+}
+.google {
+ background:#dd4b39 !important;
+}
+
+ul.sub-menu li {
+	float: left;
+}
+ul.sub-menu li:hover {
+	background: #4b545f;
+	background: linear-gradient(top, #4f5964 0%, #5f6975 40%);
+	background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%);
+	background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%);
+}
+ul.sub-menu li:hover a {
+	color: #fff;
+}
+
+ul.sub-menu li a {
+	display: block; padding: 10px 10px;
+	color: #757575; text-decoration: none;
 }

@@ -11,35 +11,96 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.ui.accordion
-//= require jquery.ui.datepicker
+//= require select2
+//= require jquery-ui
 //= require common
-//= require lazybox
+//= require modernizr
+//= require main
 //= require posts
-//= require fancybox
-//= require jquery_ujs
+//= require twitter/bootstrap
 //= require owl.carousel
 //= require turbolinks
+//= require vendor_js
 //= require_tree .
 
-$.rails.allowAction = $.lazybox.confirm;
 
-$(document).on('page:fetch', function() {
-  return $.lazybox("<i class='icon-orange'></i>", {
-    klass: 'spinner',
-    close: false,
-    esc: false
-  });
-});
+// $(document).on('ready page:load', function() {
 
-$(document).ready(function() {
-	$(".owl-carousel").owlCarousel({
-		autoPlay: 3000, //Set AutoPlay to 3 seconds 
-    items : 2,
-    itemsDesktop : [1199,3],
-    itemsDesktopSmall : [979,3],
 
-    //Auto height
-    autoHeight : false
+// $(document).ready(function() {
+//   $("#datepicker").datepicker({
+//     showOn: "button",
+//     buttonImage: "images/calendar.gif",
+//     buttonImageOnly: true,
+//     buttonText: "Select date"
+//   });
+//   console.log("text");
+// });
+//$.rails.allowAction = $.lazybox.confirm;
+
+// $(document).on('page:fetch', function() {
+//  return $.lazybox("<i class='icon-orange'></i>", {
+//    klass: 'spinner',
+//    close: false,
+//    esc: false
+//  });
+// });
+
+// $(document).ready(function() {
+//   $("select#team_select").select2({
+//     placeholder: "Select a Team"
+//   });
+// });
+
+// $(document).ready(function() {
+//   $("select#objective_select").select2({
+//     placeholder: "Select a Objective"
+//   });
+// });
+
+
+// $('ul.nav > li').click(function (e) {
+//     e.preventDefault();
+// });
+
+$(document).on('page:change', function() {
+	$(".dropdown").hover((function() {
+    	$(this).children(".sub-menu").slideDown(200);
+  	}), function() {
+    	$(this).children(".sub-menu").slideUp(200);
+  	});
+
+	$('#user_dob').datepicker({
+		dateFormat: 'dd-mm-yy'
 	});
 });
+
+// $(document).ready(function() {
+//   $( "#sprint-detail" )
+//     .accordion({
+//       header: "div"
+//     })
+//     .sortable({
+//       axis: "y",
+//       handle: "div",
+//       stop: function( event, ui ) {
+//         // IE doesn't register the blur when sorting
+//         // so trigger focusout handlers to remove .ui-state-focus
+//         ui.item.children( "div" ).triggerHandler( "focusout" );
+
+//         // Refresh accordion to handle new order
+//         $( this ).accordion( "refresh" );
+//       }
+//     });
+// });
+
+// $(document).ready(function(){
+//   $('#datepicker').datepicker({
+//     changeMonth: true,
+//     changeYear: true   
+//   });
+//   $('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
+// });
+
+  // your code here
+// });

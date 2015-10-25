@@ -5,6 +5,9 @@
   <div class="post">
     <%= f.hidden_field :user_id, :value => current_user.id if current_user %>
     <div><%= f.text_area :title, :cols => "60", :rows => "3" %></div>
+    <div><%#= f.grouped_collection_select(:objective, :phase_id, Plan.all, :phase, :name, :id, :name) %>
+      <%= f.select :objective_id, grouped_options_for_select(Plan.for_select) %></div>
+
     <div class="actions">
       <%= f.submit "Post", class: "btn"%>
     </div>
