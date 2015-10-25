@@ -236,7 +236,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  puts SOCIAL_CONFIG["FACEBOOK_KEY"]
+  #puts SOCIAL_CONFIG["FACEBOOK_KEY"]
     config.omniauth :facebook, SOCIAL_CONFIG["FACEBOOK_KEY"], SOCIAL_CONFIG["FACEBOOK_SECRET"], scope: 'email,public_profile,user_about_me', info_fields: 'email,name,first_name,last_name,gender,location'
     # config.omniauth :twitter, "jmoRN4Mqlgf2w7RT8rvgrSc32", "cESPPEpcvjSYqBCDGssKz40U2kAnsViLhYkaVQOAx7523gOzoJ", :client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}, :strategy_class => OmniAuth::Strategies::Twitter
     config.omniauth :google_oauth2, SOCIAL_CONFIG['GOOGLE_KEY'], SOCIAL_CONFIG['GOOGLE_SECRET'], {}
