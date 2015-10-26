@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 
 set :application, "CloudTrendz"
-set :repository,  "git@github.com:prashant4224/CloudTrendz.git"
+set :repository,  "git@github.com:prashant4224/TheDailyTrack.git"
 set :deploy_to,  "/ebs/apps/#{application}"
 set :applicationdir,  "/ebs/apps/#{application}"
 set :user, "ubuntu"
@@ -29,8 +29,8 @@ after "deploy:update_code", "deploy:copy_configs"
 
 task :prod do
    set :domain, "52.74.64.64"
-   set :repository, "git@github.com:prashant4224/CloudTrendz.git"
-   set :local_repository, "git@github.com:prashant4224/CloudTrendz.git"
+   set :repository, "git@github.com:prashant4224/TheDailyTrack.git"
+   set :local_repository, "git@github.com:prashant4224/TheDailyTrack.git"
    set :branch, "master"
    set :scm_verbose, true
 
