@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  start_date: 2015-03-21 01:33:35
+  end_date: 2015-03-21 01:33:35
+  type: 
+  phase_id: 
+
+two:
+  name: MyString
+  description: MyText
+  start_date: 2015-03-21 01:33:35
+  end_date: 2015-03-21 01:33:35
+  type: 
+  phase_id: 

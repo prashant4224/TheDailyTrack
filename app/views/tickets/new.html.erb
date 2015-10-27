@@ -1,0 +1,10 @@
+<div class="col-sm-4">
+  <%= render partial: "tickets", locals: { tickets: @ticket_pending.blank? ? nil : @ticket_pending + @ticket_inprogress.blank? ? nil: @ticket_inprogress, header: "Ticket" } %>
+</div>
+<div class="col-sm-8">
+	<div class="tickets">
+		<%= render 'form' %>
+	</div>
+
+<%#= link_to 'Back', tickets_path %>
+</div>

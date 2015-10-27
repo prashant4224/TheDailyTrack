@@ -1,0 +1,148 @@
+@import "twitter/bootstrap/bootstrap";
+
+// Set correct font paths
+@glyphiconsEotPath: font-url("glyphicons-halflings-regular.eot");
+@glyphiconsEotPath_iefix: font-url("glyphicons-halflings-regular.eot?#iefix");
+@glyphiconsWoffPath: font-url("glyphicons-halflings-regular.woff");
+@glyphiconsTtfPath: font-url("glyphicons-halflings-regular.ttf");
+@glyphiconsSvgPath: font-url("glyphicons-halflings-regular.svg#glyphicons_halflingsregular");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: font-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: font-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: font-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: font-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
+
+// Font Awesome
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/glyphicons.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @link-color: #ff0000;
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #F0FFFF;
+}
+#container {
+  width: inherit;
+  height: inherit;
+  margin: 0;
+  padding: 0;
+  background-color: pink;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+	max-height: 50px !important;
+
+	.row {
+		.col-sm-4 {
+			
+			.tickets, .sprint-details {
+				border: solid 2px gray;
+				margin: 5px;
+				min-height: 960px;
+				border-radius: 5px;
+
+				.ticket-header {
+					z-index: 1;
+					border-radius: 10px;
+					margin: 2px;
+					font-family: monospace;
+  				font-size: large;
+  				line-height: 30px;
+				}
+
+				.ticket {
+					margin: 2px;
+  					min-height: 80px;
+  					border-radius: 5px;  					
+				}
+			}
+
+			.ticket,.pending {
+				.ticket {
+					border: solid 1px wheat;
+				}
+				.ticket-header {
+					background-color: wheat;
+				}
+			}
+			.in-progress {
+				.ticket {
+					border: solid 1px lightblue;
+				}
+				.ticket-header {
+					background-color: lightblue;
+				}
+			}
+			.completed {
+				.ticket {
+					border: solid 1px palegreen;
+				}
+				.ticket-header {
+					background-color: palegreen;
+				}
+			}
+		}
+
+		.sign-up {
+			float: right;
+			width: 35%;
+			background-color: ghostwhite;
+		}
+
+		.col-sm-8 .tickets, .ticket-details {
+			border: solid 2px gray;
+		  	margin: 5px;
+		  	min-height: 960px;
+		}
+	}
+
+	.profile {
+		img {
+			background-image: url("1436711846_cloud-upload.png");
+		}
+	}
+}
+.user-detail {
+	background-color: aliceblue;
+	line-height: 50px;
+}
+.team-detail {
+	background-color: beige;
+	line-height: 50px;
+}
+.objective-detail {
+	background-color: gainsboro;
+	line-height: 50px;
+}
+.phase-detail {
+	background-color: cornsilk;
+	line-height: 50px;
+}
+.plan-detail {
+	background-color: antiquewhite;
+	line-height: 50px;
+}
+body {
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;
+	line-height: 1.3em !important;
+}

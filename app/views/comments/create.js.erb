@@ -1,0 +1,2 @@
+$('#post_<%= @post.id %>').find("#new_comment").prepend("<%= escape_javascript render partial: 'comments/comment', locals: {comment: @comment} %>");
+$('#post_<%= @post.id %>').find('#new_comment')[0].reset();

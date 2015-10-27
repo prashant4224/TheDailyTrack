@@ -1,0 +1,19 @@
+development:
+  FACEBOOK_KEY: xxxxxxxxxxxxxxxxxx
+  FACEBOOK_SECRET: xxxxxxxxxxxxxxxxxxxxxxx
+
+  GOOGLE_KEY: xxxxxxxxxxxxxxxxxxxxxxxxx
+  GOOGLE_SECRET: xxxxxxxxxxxxxxxxxxxxxxx
+
+  LINKEDIN_KEY: xxxxxxxxxxxxxxxxxxx
+  LINKEDIN_SECRET: xxxxxxxxxxxxxxxxx
+
+production:
+  FACEBOOK_KEY: xxxxxxxxxxxxx
+  FACEBOOK_SECRET: xxxxxxxxxxxxx
+
+  GOOGLE_KEY: xxxxxxxxxxxxxxxxxxx
+  GOOGLE_SECRET: xxxxxxxxxxxxxxx
+
+  LINKEDIN_KEY: xxxxxxxxxxxxxxxxx
+  LINKEDIN_SECRET: xxxxxxxxxxxxxxxxxx

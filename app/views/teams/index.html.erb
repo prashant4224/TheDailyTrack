@@ -1,0 +1,79 @@
+<div class="content-center">
+	<div class="content">
+		<%#= render :partial => 'plans/form', :locals => {plan: @plan} %>
+		<%#= render :partial => 'teams/form', :locals => {team: @team} %>
+		<% if !@teams.blank? %>
+			<%= Team.comment_list %>
+			<div id="teams">
+				<% @teams.each do |team| %>
+					<%= team.first_comment %>
+					<% p "team" %>
+			  		<%# next if team.blank? %>
+					<div id="team-<%= team.id %>" class="team">
+					    <h3 class="title" style="border: 1px solid red;margin: 1px;">
+					    	<%= team.name %><p style="float: right;"><%= team.plans.size %> Plans</p><br>
+					    </h3>
+					</div>
+					<div id="team-desc-<%= team.id %>">
+						<p><%= team.name %></p>
+						<p><%= team.description %></p>
+					
+			        	<% team.plans.each do |plan| %>
+					        <!-- <div style="border: 2px solid green;margin: 1px;"> -->
+					        <div id="plan-<%= plan.id %>" class="plan" style="background-color: lightblue;">
+					            <%= link_to "Add Plan", new_team_plan_path(team), remote: true, class: "btn" %><br>
+					            <div id="add-plan"></div>        
+					            <%= plan.name %><p style="float: right;"><%= plan.phases.size %> Phases</p><br>
+					            <%= plan.description %><br>
+					        </div>
+			          		<% plan.phases.each do |phase| %>
+					            <!-- <div style="border: 2px solid blue;margin: 1px;">                 -->
+					            <div id="phase-<%= phase.id %>" class="phase">
+						            <%= link_to "Add Phase", new_team_plan_phase_path(team,plan), remote: true, class: "btn" %><br>
+						            <div id="add-phase"></div>
+						              <%= phase.name %><p style="float: right;"><%= phase.objectives.size %> Objectives</p><br>
+						              <%= phase.description %><br>                
+					            </div>
+					            <% phase.objectives.each do |objective| %>
+									<!-- <div style="border: 2px solid yellow;margin: 1px;"> -->
+									<div>
+										<%= link_to "Add Objective", new_team_plan_phase_objective_path(team,  plan, phase), remote: true, class: "btn" %><br>
+										<div id="add-objective"></div>
+										<%= objective.name %><br>
+										<%= objective.description %><br>
+										<%#= objective.type %><p style="float: right;"><%#= objective.posts.size %> Posts</p>
+										<br>
+									</div>
+			              
+						            <%# objective.posts.each do |post| %>
+						                <!-- <div style="border: 2px solid grey;margin: 1px;"> -->
+						                <!-- <div> -->
+											<%#= link_to "Add Post", new_team_plan_phase_objective_post_path(team, plan, phase, objective), remote: true, class: "btn" %><!-- <br> -->
+											<!-- <div id="add-post"></div> -->
+											<%#= post.title %><!-- <p style="float: right;"><%#= post.comments.count %> Comments</p><br> -->
+						                <!-- </div> -->
+										<%# post.comments.each do |comment| %>
+											<!-- <div style="border: 2px solid lightblue;margin: 1px;"> -->
+											<!-- <div> -->
+												<%#= link_to "Add Comment", new_team_plan_phase_objective_post_comment_path(team, plan, phase, objective, post), remote: true, class: "btn" %><!-- <br> -->
+											<!-- 	<div id="add-comment"></div> -->
+												<%#= comment.body %>
+											<!-- </div> -->
+										<%# end %>
+						            <%# end %>
+			            		<% end %>
+				            <% end %>
+			        	<% end %>
+			        </div>
+				    
+
+				    <%#= link_to "Add Plan", new_team_plan_path([team,@plan]), remove: true %>
+				    <%- model_class = Plan -%>
+				      <%#= render :partial => 'plans/form', locals: {plan: @plan, parent: team} %>
+				  <!-- </div> -->
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>
+<div class="clear"></div>

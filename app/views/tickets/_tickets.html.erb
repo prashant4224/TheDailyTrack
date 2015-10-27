@@ -1,0 +1,41 @@
+<div class="tickets <%=header_map(header)%>">
+	<div class="ticket-header">
+		<%= header %>
+	</div>
+	<% unless tickets.blank? %>
+		<% tickets.each do |ticket| %>
+			<div class="ticket" id="<%=ticket.id%>">
+					<div class="team left">
+						<% if ticket.team %>
+							<%#= link_to ticket.team.try(:name), ticket.team %>
+						<% end %>
+					</div>
+					<div class="right">
+						<% if ["pending"].include?(ticket.status) %>
+							<%= form_for(ticket, method: :put) do |f| %>
+								<%= f.hidden_field :status, value: "in_progress" %>
+								<%#= link_to image_tag("1434206553_arrow-right.png"), tupdate_ticket_path(ticket), method: :put, remote: true %>
+								<%= image_submit_tag("1434206553_arrow-right.png") %>
+							<% end %>
+						<% elsif ["in_progress"].include?(ticket.status) %>
+							<%= form_for(ticket, method: :put) do |f| %>
+								<%= f.hidden_field :status, value: "completed" %>
+								<%#= link_to image_tag("1434206553_arrow-right.png"), tupdate_ticket_path(ticket), method: :put, remote: true %>
+								<%= image_submit_tag("1434206553_arrow-right.png") %>
+							<% end %>
+						<% end %>
+					</div><br>
+		    	<div><i><%= ticket.try(:user).try(:email) %></i></div>
+		    	<div class="title" style="font-family: monospace;font-size: 18px;"><%= link_to ticket.title, ticket %></div>
+	    		<div><%= link_to ticket.body, ticket %></div>
+		    	<%#= ticket.team %>
+			    <%#= ticket.status %>
+			    <%#= ticket.objective %>
+			    <%#= link_to 'Show', ticket %>
+			    <%#= link_to 'Edit', edit_ticket_path(ticket) %>
+			    <%#= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+<%#= link_to 'New Ticket', new_ticket_path %>

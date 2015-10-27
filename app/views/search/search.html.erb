@@ -1,0 +1,19 @@
+<h1>Tickets Search</h1>
+ 
+<%= form_for search_path, method: :get do |f| %>
+  <p>
+    <%= f.label "Search for" %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Go", name: nil %>
+  </p>
+<% end %>
+ 
+<ul>
+  <% @tickets.each do |ticket| %>
+    <li>
+      <h3>
+        <%= link_to ticket.title, controller: "tickets", action: "show", id: ticket._id%>
+      </h3>
+    </li>
+  <% end %>
+</ul>

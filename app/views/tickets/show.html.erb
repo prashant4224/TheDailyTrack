@@ -1,0 +1,104 @@
+<div class="col-sm-4">
+	<div class="sprint-details" id="sprint-detail">
+		<!-- <div class="user-detail" id="user-<%#= @ticket.user.id %>"> -->
+			<%# if @ticket.user %>
+				<%#= link_to @ticket.user.try(:email), "#" %>
+			<%# end %>
+		<!-- </div> -->
+		<div class="details" id="team-<%= @ticket.team.try(:id) %>">
+			<%= puts @ticket.test_x %>
+			<%#= puts @ticket.test_a %>
+			<% if @ticket.team %>
+				<%= team_name(@ticket.team) %>
+				<% @ticket.team.plans.each do |plan| %>
+					<p class="sub-1"><%= plan_name(plan) %></p>
+					<% plan.phases.each do |phase| %>
+						<p class="sub-2"><%= phase_name(phase) %></p>
+						<% phase.objectives.each do |objective| %>
+							<p class="sub-3"><%= objective_name(objective) %></p>
+							<% objective.tickets.each do |ticket| %>
+								<p class="sub-4"><%= ticket_name(ticket) %></p>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="details" id="plan-<%= @ticket.try(:objective).try(:phase).plan_id %>">
+			<% if @ticket.try(:objective).try(:phase).try(:plan) %>
+				<% plan_t = @ticket.try(:objective).try(:phase).try(:plan) %>
+				<%= plan_name(plan_t) %>
+				<% plan_t.phases.each do |phase| %>
+					<p class="sub-1"><%= phase_name(phase) %></p>
+					<% phase.objectives.each do |objective| %>
+						<p class="sub-2"><%= objective_name(objective) %></p>
+						<% objective.tickets.each do |ticket| %>
+							<p class="sub-3"><%= ticket_name(ticket) %></p>
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="details" id="phase-<%= @ticket.objective.phase_id %>">
+			<% if @ticket.objective.try(:phase) %>
+				<% phase_t = @ticket.objective.try(:phase) %>
+				<%= phase_name(phase_t) %>
+				<% phase_t.objectives.each do |objective| %>
+					<p class="sub-1"><%= objective_name(objective) %></p>
+					<% objective.tickets.each do |ticket| %>
+						<p class="sub-2"><%= ticket_name(ticket) %></p>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="details" id="objective-<%= @ticket.objective_id %>">
+			<% if @ticket.objective %>
+				<% objective_t = @ticket.objective %>
+				<%= objective_name(objective_t) %>
+				<% objective_t.tickets.each do |ticket| %>
+					<p class="title"><%= ticket_name(ticket) %></p>
+				<% end %>
+			<% end %>
+		</div>		
+	</div>
+</div>
+<div class="col-sm-8" id="ticket-<%= @ticket.id %>">
+	<div class="ticket-details">
+		<p id="notice"><%= notice %></p>
+		<p>
+			<strong>Title:</strong>
+			<%= @ticket.title %>
+		</p>
+
+		<p>
+			<strong>Body:</strong>
+			<%= @ticket.body %>
+		</p>
+	</div>
+</div>
+
+
+<!-- <p>
+  <strong>Team:</strong>
+  <%#= @ticket.team %>
+</p> -->
+
+<!-- <p>
+  <strong>User:</strong>
+  <%#= @ticket.user %>
+</p> -->
+
+<!-- <p>
+  <strong>Status:</strong>
+  <%#= @ticket.status %>
+</p> -->
+
+<!-- <p>
+  <strong>Objective:</strong>
+  <%#= @ticket.objective %>
+</p> -->
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>
+
+<%= link_to "New", new_team_plan_phase_objective_ticket_path(@ticket.objective, @ticket.objective.phase, @ticket.objective.phase.plan, @ticket.objective.phase.plan.team) %>

@@ -1,0 +1,7 @@
+<div class="profile">
+	<%= image_tag(@user.avatar.url(:tiny), size: "80x80") %>
+	<%= link_to @user.email, edit_user_registration_path(resource)%>
+	<%= @user.name %>
+	<%= @user.last_name %>
+	<%= @user.dob %>
+</div>

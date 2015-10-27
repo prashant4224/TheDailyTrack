@@ -1,0 +1,14 @@
+    <%= current_user.first_comment %>
+    <%= User.comment_list %>
+    <div class="col-sm-4">
+      <%= render partial: "tickets", locals: { tickets: @ticket_pending, header: "Pending" } %>
+      <%#= render partial: "tickets", object: @ticket_pending %>
+      <%#= render partial: "whatever", locals: { ticket_pending: @ticket_pending } %>
+    </div>
+    <div class="col-sm-4">
+      <%= render partial: "tickets", locals: { tickets: @ticket_inprogress, header: "In Progress" } %>
+    </div>
+    <div class="col-sm-4">
+      <%= render partial: "tickets", locals: { tickets: @ticket_completed, header: "Completed" } %>
+    </div>
+    
